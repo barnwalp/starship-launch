@@ -1,0 +1,13 @@
+{
+  "name": "starship-project-api",
+  "version": "1.0.0",
+  "description": "Starship Mission Control",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+		"watch": "nodemon src/server.js",
+		"start": "PORT=5000 node src/server.js"
+  },
+  "author": "Pankaj Barnwal",
+  "license": "MIT"
+}

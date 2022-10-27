@@ -36,16 +36,16 @@ const styles = () => ({
   },
 });
 
-const AppLayout = () => {
-  // const { sounds, classes } = props;
+const AppLayout = props => {
+  const { sounds, classes } = props;
 
   const [frameVisible, setFrameVisible] = useState(true);
-  // const animateFrame = () => {
-  //   setFrameVisible(false);
-  //   setTimeout(() => {
-  //     setFrameVisible(true);
-  //   }, 600);
-  // };
+  const animateFrame = () => {
+    setFrameVisible(false);
+    setTimeout(() => {
+      setFrameVisible(true);
+    }, 600);
+  };
 
   const onSuccessSound = () => sounds.success && sounds.success.play();
   const onAbortSound = () => sounds.abort && sounds.abort.play();

@@ -1,15 +1,27 @@
-import {
-  BrowserRouter as Router,
-} from "react-router-dom";
+import { Routes, Route, BrowserRouter } from "react-router-dom";
+import { Fragment } from 'react';
 
-import AppLayout from "./pages/AppLayout";
+import Navigation from "./Routes/Navigation";
+import History from "./Routes/History";
+import Upcoming from "./Routes/Upcoming";
+import Launch from "./Routes/Launch";
 
 // import { resources } from "./settings";
 
 const App = () => {
-	<Router>
-		<AppLayout />
-	</Router>
+	return(
+		<Fragment>
+			<BrowserRouter>
+				<Routes>
+					<Route path="/" element={<Navigation />}>
+						<Route index element={<Launch />} />
+						<Route path="upcoming" element={<Upcoming />} />
+						<Route path="history" element={<History />} />
+					</Route>
+				</Routes>
+			</BrowserRouter>
+		</Fragment>
+	)
 };
 
 export default App;

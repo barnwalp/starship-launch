@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-import { Fragment } from 'react';
 
 import Navigation from "./Routes/Navigation";
 import History from "./Routes/History";
@@ -10,7 +9,7 @@ import Launch from "./Routes/Launch";
 
 const App = () => {
 	return(
-		<Fragment>
+		<div className="bg-main h-screen text-primary">
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Navigation />}>
@@ -20,7 +19,7 @@ const App = () => {
 					</Route>
 				</Routes>
 			</BrowserRouter>
-		</Fragment>
+		</div>
 	)
 };
 

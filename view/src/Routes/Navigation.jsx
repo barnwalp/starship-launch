@@ -1,12 +1,15 @@
-import { Outlet } from 'react-router-dom';
+import { Link, Outlet } from 'react-router-dom';
 import { Fragment } from 'react';
 
 const Navigation = () => {
 	return (
 		<Fragment>
-			<div>
-				<h3>Navigation</h3>
-			</div>
+			<nav className="flex justify-between">
+				<h3>Starship Launch</h3>
+				<Link className="uppercase" to="/">Launch</Link>	
+				<Link to="/upcoming">Upcoming</Link>	
+				<Link to="/history">History</Link>	
+			</nav>
 			<Outlet />
 		</Fragment>
 	)

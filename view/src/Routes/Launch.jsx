@@ -11,9 +11,10 @@ const Launch = () => {
 				<li>Effective stellar flux &#60; 0.36 times Earth's value and &#60; 1.11 times Earth's value</li>
 			</ul>
 			
-			<form>
+			<form className="text-xl mt-4 w-7/12 grid grid-cols-2 gap-3">
 				<label htmlFor="launch-date">Launch Date</label>
 				<input 
+					className="text-black text-lg px-2 font-medium"
 					type="date" 
 					id="launch-day" 
 					name="launch-day" 
@@ -23,12 +24,14 @@ const Launch = () => {
 				/>
 				<label htmlFor="mission-name">Mission Name</label>
 				<input 
+					className="text-black text-lg px-2 font-medium"
 					type="text"
 					id="mission-name"
 					name="mission-name"
 				/>
 				<label htmlFor="rocket-name">Mission Name</label>
 				<input 
+					className="text-black text-lg px-2 font-medium"
 					type="text"
 					id="rocket-name"
 					name="rocket-name"
@@ -39,6 +42,7 @@ const Launch = () => {
 					<option value=""></option>
 				</select>
 				<button
+					className="text-green px-0 py-2 border-green border-2"
 					type="submit">
 					Launch Mission
 				</button>

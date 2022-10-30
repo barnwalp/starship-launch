@@ -7,7 +7,7 @@ const Navigation = () => {
 		<Fragment>
 			<nav className="flex py-4  border-transparent border-b-primary border-b-4 text-2xl space-x-10 justify-center">
 				<h3>
-					<Logo className="w-8 inline-block mr-2"/> 
+					<Logo className="w-8 inline-block animate-delay-spin duration-1000 mr-2"/> 
 					Starship Launch
 				</h3>
 				<Link className="text-lightPrimary" to="/">Launch</Link>	

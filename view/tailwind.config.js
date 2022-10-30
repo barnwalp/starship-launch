@@ -11,6 +11,9 @@ module.exports = {
 			lightPrimary: '#A1ECFB',
 		},
 		extend: {
+			animation: {
+				'delay-spin': 'spin 8s linear infinite',
+      },
 			backgroundImage:{
 				'main': "url('./img/background-large.jpg')",
 			}

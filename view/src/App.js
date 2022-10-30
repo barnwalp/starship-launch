@@ -1,5 +1,4 @@
 import { Routes, Route, BrowserRouter } from "react-router-dom";
-
 import Navigation from "./Routes/Navigation";
 import History from "./Routes/History";
 import Upcoming from "./Routes/Upcoming";
@@ -9,7 +8,7 @@ import Launch from "./Routes/Launch";
 
 const App = () => {
 	return(
-		<div className="bg-main font-extralight font-dosis text-primary">
+		<div className="bg-main h-screen font-extralight font-dosis text-primary">
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Navigation />}>

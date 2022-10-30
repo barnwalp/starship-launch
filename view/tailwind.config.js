@@ -11,6 +11,9 @@ module.exports = {
 			lightPrimary: '#A1ECFB',
 		},
 		extend: {
+			fontFamily: {
+				dosis: ['Dosis', 'sans-serif'],
+			},
 			animation: {
 				'delay-spin': 'spin 8s linear infinite',
       },

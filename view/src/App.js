@@ -9,7 +9,7 @@ import Launch from "./Routes/Launch";
 
 const App = () => {
 	return(
-		<div className="bg-main text-primary">
+		<div className="bg-main font-extralight font-dosis text-primary">
 			<BrowserRouter>
 				<Routes>
 					<Route path="/" element={<Navigation />}>

@@ -1,6 +1,6 @@
 import { Link, Outlet } from 'react-router-dom';
 import { Fragment } from 'react';
-import { ReactComponent as Logo } from '../img/solar2.svg';
+import { ReactComponent as Logo } from '../img/solar2.svg'
 
 const Navigation = () => {
 	return (
@@ -10,9 +10,9 @@ const Navigation = () => {
 					<Logo className="w-8 inline-block animate-delay-spin duration-1000 mr-2"/> 
 					Starship Launch
 				</h3>
-				<Link className="text-lightPrimary" to="/">Launch</Link>	
-				<Link className="text-lightPrimary" to="/upcoming">Upcoming</Link>	
-				<Link className="text-lightPrimary" to="/history">History</Link>	
+				<Link className="text-lightPrimary font-light hover:text-primary" to="/">Launch</Link>	
+				<Link className="text-lightPrimary font-light hover:text-primary" to="/upcoming">Upcoming</Link>	
+				<Link className="text-lightPrimary font-light hover:text-primary" to="/history">History</Link>	
 			</nav>
 			<Outlet />
 		</Fragment>

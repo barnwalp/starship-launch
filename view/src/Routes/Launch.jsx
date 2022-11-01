@@ -7,14 +7,11 @@ const Launch = () => {
 	
 	useEffect(async () => {
 		const response = await httpGetPlanets();
-		console.log('##################')
-		console.log(response);
-		console.log('##################')
-		console.log(response.json());
-		setPlanets(response.json());
-	}, [planets])
+		setPlanets(response);
+		// console.log(response);
+	}, [])
+	console.log(planets);
 	
-	// console.log(`planets are: ${planets}`);
 	return (
 		<div className="w-2/3 p-6 border-2 mt-6 mx-auto">
 			<p className="text-2xl">Schedule a mission launch for interstellar travel to one of the kepler Exoplanets.</p>

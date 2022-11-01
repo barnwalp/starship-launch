@@ -1,6 +1,20 @@
-const Launch = () => {
-	const today = new Date().toISOString().split("T")[0];
+import { useState, useEffect } from 'react';
+import { httpGetPlanets } from '../hooks/request';
 
+const Launch = () => {
+	const [planets, setPlanets] = useState([]);
+	const today = new Date().toISOString().split("T")[0];
+	
+	useEffect(async () => {
+		const response = await httpGetPlanets();
+		console.log('##################')
+		console.log(response);
+		console.log('##################')
+		console.log(response.json());
+		setPlanets(response.json());
+	}, [planets])
+	
+	// console.log(`planets are: ${planets}`);
 	return (
 		<div className="w-2/3 p-6 border-2 mt-6 mx-auto">
 			<p className="text-2xl">Schedule a mission launch for interstellar travel to one of the kepler Exoplanets.</p>

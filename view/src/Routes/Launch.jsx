@@ -5,12 +5,14 @@ const Launch = () => {
 	const [planets, setPlanets] = useState([]);
 	const today = new Date().toISOString().split("T")[0];
 	
-	useEffect(async () => {
-		const response = await httpGetPlanets();
-		setPlanets(response);
-		// console.log(response);
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await httpGetPlanets();
+			setPlanets(response.planets);
+		}
+		fetchData();
 	}, [])
-	console.log(planets);
+	console.log(planets[1]);
 	
 	return (
 		<div className="w-2/3 p-6 border-2 mt-6 mx-auto">
@@ -28,7 +30,7 @@ const Launch = () => {
 					className="text-black text-lg px-2 font-medium"
 					type="date" 
 					id="launch-day" 
-					name="launch-day" 
+					nameshi="launch-day" 
 					min={today} 
 					max="2030-12-31" 
 					defaultValue={today} 

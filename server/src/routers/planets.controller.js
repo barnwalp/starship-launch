@@ -1,8 +1,15 @@
-const planets = require('../models/planets.model');
+const { getPlanets } = require('../models/planets.model');
 
 function getAllPlanets(req, res) {
-	res.status(200).json(planets);
-	next();
+	getPlanets()
+		.then((data) => {
+			console.log(data);
+			res.status(200).json(planets);
+			next();
+		})
+		.catch((err) => {
+			console.log(err);
+		})
 }
 
 module.exports = {

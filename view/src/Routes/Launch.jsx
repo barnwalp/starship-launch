@@ -8,11 +8,17 @@ const Launch = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await httpGetPlanets();
-			setPlanets(response.planets);
+			const planetList = [];
+			response.map((planet) => {
+				// console.log(planet.kepler_name);
+				planetList.push(planet.kepler_name);
+			})
+			console.log(planetList);
+			setPlanets(planetList);
 		}
 		fetchData();
 	}, [])
-	console.log(planets[1]);
+	console.log(planets);
 	
 	return (
 		<div className="w-2/3 p-6 border-2 mt-6 mx-auto">

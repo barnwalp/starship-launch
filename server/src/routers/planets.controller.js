@@ -1,15 +1,22 @@
-const { getPlanets } = require('../models/planets.model');
+const { planets, getPlanets } = require('../models/planets.model');
+
+getPlanets()
+	.then(console.log('success'))
+	.catch((err) => {
+		console.log(err);
+	})
+
+console.log({planets});
 
 function getAllPlanets(req, res) {
-	getPlanets()
-		.then((data) => {
-			console.log(data);
-			res.status(200).json(planets);
-			next();
-		})
-		.catch((err) => {
-			console.log(err);
-		})
+	res.status(200).json(planets);
+	// getPlanets()
+	// 	.then((planets) => {
+	// 		res.status(200).json(planets);
+	// 	})
+	// 	.catch((err) => {
+	// 		console.log(err);
+	// 	})
 }
 
 module.exports = {

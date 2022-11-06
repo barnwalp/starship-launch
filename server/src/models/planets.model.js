@@ -11,7 +11,6 @@ function isHabitablePlanet(planet) {
 }
 
 // fs.createReadStream run codes asynchronously so it should be wrapped inside of promise
-
 function getPlanets() {
 	return new Promise((resolve, reject) => {
 		fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
@@ -22,11 +21,9 @@ function getPlanets() {
 			.on('data', (data) => {
 				if (isHabitablePlanet(data)) {
 					habitablePlanets.push(data);
-					resolve(habitablePlanets);
 				}
 			})
 			.on('error', (err) => {
-				// console.log(err);
 				reject(err);
 			})
 			.on('end', () => {
@@ -34,6 +31,7 @@ function getPlanets() {
 					return planet['kepler_name'];
 				}));
 				console.log(`${habitablePlanets.length} habitable planets found!`);
+				resolve();
 			});
 	})
 }

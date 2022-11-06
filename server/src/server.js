@@ -7,6 +7,7 @@ const { planetsRouter } = require('../src/routers/planets.router');
 const PORT = process.env.PORT || 8000;
 const app = express();
 
+// cors is needed so that app can access sites outside of its domain
 app.use(cors({
 	origin: 'http://localhost:3000',
 }))

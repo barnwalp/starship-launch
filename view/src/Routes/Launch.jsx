@@ -57,8 +57,16 @@ const Launch = () => {
 					defaultValue="Explorer IS1"
 				/>
 				<label htmlFor="planets-selector">Destination Exoplanet</label>
-				<select id="planets-selector" name="planets-selector">
-					<option value=""></option>
+				<select className="text-black text-lg px-2 font-medium" id="planets-selector" name="planets-selector">
+					{planets.map((planet_name) => {
+						return (
+							<option 
+								value={planet_name} 
+								key={planet_name}>
+								{planet_name}
+							</option>
+						)
+					})}
 				</select>
 				<button
 					className="text-green px-0 py-2 border-green border-2"

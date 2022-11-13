@@ -9,7 +9,7 @@ const app = express();
 
 // cors is needed so that app can access sites outside of its domain
 app.use(cors({
-	origin: 'http://localhost:3000',
+	origin: 'http://localhost:3006',
 }))
 app.use(express.json());
 app.use('/planets', planetsRouter);

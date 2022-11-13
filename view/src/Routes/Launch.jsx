@@ -8,12 +8,13 @@ const Launch = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await httpGetPlanets();
+			console.log(response);
 			const planetList = [];
 			response.map((planet) => {
-				// console.log(planet.kepler_name);
+				console.log(planet.kepler_name);
 				planetList.push(planet.kepler_name);
 			})
-			console.log(planetList);
+			// console.log(planetList);
 			setPlanets(planetList);
 		}
 		fetchData();

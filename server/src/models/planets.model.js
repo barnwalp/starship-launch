@@ -11,7 +11,7 @@ function isHabitablePlanet(planet) {
 }
 
 // fs.createReadStream run codes asynchronously so it should be wrapped inside of promise
-function getPlanets() {
+function getPlanetStream() {
 	return new Promise((resolve, reject) => {
 		fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
 			.pipe(parse({
@@ -36,8 +36,15 @@ function getPlanets() {
 	})
 }
 
-// export the habitablePlanets after renaming
+// Creating a function to get the habitable planets, same will be used in the controller
+function getPlanets() {
+	getPlanetStream()
+		.then(data => console.log(data))
+		.catch(err => console.log(err));
+	// console.log(`habitable planets are: ${habitablePlanets}`)
+	return habitablePlanets;
+}
+
 module.exports = {
-	planets: habitablePlanets,
 	getPlanets,
 }

@@ -9,6 +9,10 @@ const launch = {
 	success: true
 }
 
+function getLaunches() {
+	return launch;
+}
+
 module.exports = {
-	launch
+	getLaunches,
 }

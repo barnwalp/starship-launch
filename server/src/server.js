@@ -2,6 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
 const { planetsRouter } = require('../src/routes/planets/planets.router');
+const { launchesRouter } = require('../src/routes/launches/launches.router');
 
 // Since react runs on port 3000, server must be on another port
 // if PORT is not specified in the environment, 8000 will be used
@@ -16,6 +17,7 @@ app.use(cors({
 app.use(morgan('combined'));
 app.use(express.json());
 app.use('/planets', planetsRouter);
+app.use('/launches', launchesRouter);
 
 app.listen(PORT, () => {
 	console.log(`Listening on PORT ${PORT}`);

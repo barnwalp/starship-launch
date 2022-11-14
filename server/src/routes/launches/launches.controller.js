@@ -1,24 +1,11 @@
-const { planets, getPlanets } = require('../models/planets.model');
+const { launch } = require('../../models/launches.model');
 
-getPlanets()
-	.then(console.log('success'))
-	.catch((err) => {
-		console.log(err);
-	})
+console.log(launch);
 
-console.log({planets});
-
-function getAllPlanets(req, res) {
-	res.status(200).json(planets);
-	// getPlanets()
-	// 	.then((planets) => {
-	// 		res.status(200).json(planets);
-	// 	})
-	// 	.catch((err) => {
-	// 		console.log(err);
-	// 	})
+function getAllLaunches(req, res) {
+	res.status(200).json(launch);
 }
 
 module.exports = {
-	getAllPlanets
+	getAllLaunches
 };

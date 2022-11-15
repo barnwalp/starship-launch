@@ -6,6 +6,15 @@ async function httpGetPlanets() {
 	return planets;
 }
 
+async function httpGetLaunches() {
+	// TODO: Once API is ready
+	const response = await fetch('http://localhost:7000/launches');	
+	// Load launches and return JSON
+	const launches = await response.json();	
+	return launches;	
+}
+
 export {
 	httpGetPlanets,
+	httpGetLaunches,
 };

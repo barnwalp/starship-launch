@@ -19,7 +19,15 @@ const Launch = () => {
 		}
 		fetchData();
 	}, [])
-	console.log(planets);
+	// console.log(planets);
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log(event.target[0].value);
+		console.log(event.target[1].value);
+		console.log(event.target[2].value);
+		console.log(event.target[3].value);
+	}
 	
 	return (
 		<div className="w-2/3 p-6 border-2 mt-6 mx-auto">
@@ -31,13 +39,16 @@ const Launch = () => {
 				<li>Effective stellar flux &#60; 0.36 times Earth's value and &#60; 1.11 times Earth's value</li>
 			</ul>
 			
-			<form className="text-xl mt-4 w-7/12 grid grid-cols-2 gap-3">
+			<form 
+				className="text-xl mt-4 w-7/12 grid grid-cols-2 gap-3"
+				onSubmit={handleSubmit}
+				>
 				<label htmlFor="launch-date">Launch Date</label>
 				<input 
 					className="text-black text-lg px-2 font-medium"
 					type="date" 
 					id="launch-day" 
-					nameshi="launch-day" 
+					name="launch-day" 
 					min={today} 
 					max="2030-12-31" 
 					defaultValue={today} 
@@ -48,8 +59,9 @@ const Launch = () => {
 					type="text"
 					id="mission-name"
 					name="mission-name"
+					defaultValue="Earth 2.0"
 				/>
-				<label htmlFor="rocket-name">Mission Name</label>
+				<label htmlFor="rocket-name">Rocket Name</label>
 				<input 
 					className="text-black text-lg px-2 font-medium"
 					type="text"

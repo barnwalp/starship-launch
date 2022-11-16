@@ -7,13 +7,17 @@ function getAllLaunches(req, res) {
 }
 
 function postLaunch(req, res) {
-	if(!req.body.mission) {
+	if(!req.body.mission || !req.body.rocket || !req.body.launchDate || !req.body.destination) {
 		res.status(400).json({
 			error: 'Invalid Request'
 		});
+	} else if (isNaN(new Date(req.body.launchDate))){
+		res.status(400).json({
+			error: 'Invalid Launch Date'
+		})	
 	}	else {
 		const newLaunch = {
-			flightNumber: launches.length+1,
+			flightNumber: launches.length+100,
 			mission: req.body.mission,
 			rocket: req.body.rocket,
 			launchDate: new Date(req.body.launchDate),

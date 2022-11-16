@@ -10,7 +10,7 @@ const Upcoming = () => {
 			setLaunches(response);
 		}
 		getLaunches();
-	}, [])
+	}, [launches])
 	console.log(launches);
 	const launchTable = launches.map((launch) => {
 		return (

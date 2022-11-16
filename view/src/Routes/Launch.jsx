@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { httpGetPlanets } from '../hooks/request';
+import { httpGetPlanets, httpSubmitLaunch } from '../hooks/request';
 
 const Launch = () => {
 	const [planets, setPlanets] = useState([]);
@@ -23,10 +23,23 @@ const Launch = () => {
 
 	const handleSubmit = (event) => {
 		event.preventDefault();
-		console.log(event.target[0].value);
-		console.log(event.target[1].value);
-		console.log(event.target[2].value);
-		console.log(event.target[3].value);
+		const callhttpSubmitLaunch = async () => {
+			const mission = event.target[0].value;
+			const rocket = event.target[1].value;
+			const launchDate = event.target[2].value;
+			const destination = event.target[3].value;
+			await httpSubmitLaunch({
+				mission,
+				rocket,
+				launchDate,
+				destination
+			})
+		}
+		callhttpSubmitLaunch();
+		// console.log(event.target[0].value);
+		// console.log(event.target[1].value);
+		// console.log(event.target[2].value);
+		// console.log(event.target[3].value);
 	}
 	
 	return (

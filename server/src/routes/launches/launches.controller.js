@@ -7,6 +7,8 @@ function getAllLaunches(req, res) {
 }
 
 function postLaunch(req, res) {
+	const formDate = req.body.launchDate;
+	const dateInString = new Date(formDate).toDateString();
 	if(!req.body.mission || !req.body.rocket || !req.body.launchDate || !req.body.destination) {
 		res.status(400).json({
 			error: 'Invalid Request'
@@ -20,7 +22,7 @@ function postLaunch(req, res) {
 			flightNumber: launches.length+100,
 			mission: req.body.mission,
 			rocket: req.body.rocket,
-			launchDate: new Date(req.body.launchDate),
+			launchDate: dateInString,
 			destination: req.body.destination,
 			customer: ['ISRO', 'NASA'],
 			upcoming: true,

@@ -34,7 +34,19 @@ function postLaunch(req, res) {
 	}
 }
 
+function abortLaunch(req, res) {
+	const id = Number(req.params.id);
+	launches.map((launch) => {
+		if(launch.flightNumber === id) {
+			launch.upcoming = false;
+			launch.success = false;
+			res.status(200).json(launch);
+		}
+	})
+}
+
 module.exports = {
 	getAllLaunches,
 	postLaunch,
+	abortLaunch,
 };

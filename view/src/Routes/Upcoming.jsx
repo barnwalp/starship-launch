@@ -12,7 +12,9 @@ const Upcoming = () => {
 		getLaunches();
 	}, [launches])
 	console.log(launches);
-	const launchTable = launches.map((launch) => {
+	const filteredLaunch = launches.filter(launch => launch.upcoming)
+	console.log(filteredLaunch);
+	const launchTable = filteredLaunch.map((launch) => {
 		return (
 			<tr className="">
 				<td className="font-light py-1 text-center">{launch.flightNumber}</td>

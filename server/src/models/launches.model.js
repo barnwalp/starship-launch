@@ -25,6 +25,11 @@ function getLaunches() {
 	return launch;
 }
 
+function noOfLaunches() {
+	return launch.length;
+}
+
 module.exports = {
 	getLaunches,
+	noOfLaunches,
 }

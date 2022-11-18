@@ -1,19 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { httpGetLaunches } from '../hooks/request';
 
 const Upcoming = () => {
 	const [launches, setLaunches] = useState([]);
+	const [noOfLaunches, setNoOfLaunches] = useState(launches.length);
+
+	const getLaunches = useCallback(async () => {
+		let response = await httpGetLaunches();
+		setLaunches(response);
+	}, []);
 
 	useEffect(() => {
-		const getLaunches = async () => {
-			let response = await httpGetLaunches();
-			setLaunches(response);
-		}
+		// const getLaunches = async () => {
+		// 	let response = await httpGetLaunches();
+		// 	setLaunches(response);
+		// 	setNoOfLaunches(launches.length);
+		// }
 		getLaunches();
-	}, [launches])
-	console.log(launches);
+	}, [getLaunches]);
+	// console.log(launches);
+	
 	const filteredLaunch = launches.filter(launch => launch.upcoming)
 	console.log(filteredLaunch);
+
 	const launchTable = filteredLaunch.map((launch) => {
 		return (
 			<tr className="">
@@ -25,6 +34,7 @@ const Upcoming = () => {
 			</tr>
 		)
 	})
+
 	return (
 		<div className="h-screen">
 			<div className="w-2/3 p-6 border-2 mt-6 mx-auto">

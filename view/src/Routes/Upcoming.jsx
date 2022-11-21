@@ -3,7 +3,6 @@ import { httpGetLaunches } from '../hooks/request';
 
 const Upcoming = () => {
 	const [launches, setLaunches] = useState([]);
-	const [noOfLaunches, setNoOfLaunches] = useState(launches.length);
 
 	const getLaunches = useCallback(async () => {
 		let response = await httpGetLaunches();

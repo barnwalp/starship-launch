@@ -1,42 +1,7 @@
-import { useState, useEffect } from 'react';
-import { httpGetPlanets, httpSubmitLaunch } from '../hooks/request';
+const Launch = (props) => {
+	const { planets, handleSubmit } = props;
 
-const Launch = () => {
-	const [planets, setPlanets] = useState([]);
 	const today = new Date().toISOString().split("T")[0];
-	
-	useEffect(() => {
-		const fetchData = async () => {
-			const response = await httpGetPlanets();
-			// console.log(response);
-			const planetList = [];
-			response.map((planet) => {
-				// console.log(planet.kepler_name);
-				planetList.push(planet.kepler_name);
-			})
-			// console.log(planetList);
-			setPlanets(planetList);
-		}
-		fetchData();
-	}, [])
-	// console.log(planets);
-
-	const handleSubmit = (event) => {
-		event.preventDefault();
-		const callhttpSubmitLaunch = async () => {
-			const launchDate = event.target[0].value;
-			const mission = event.target[1].value;
-			const rocket = event.target[2].value;
-			const destination = event.target[3].value;
-			await httpSubmitLaunch({
-				launchDate,
-				mission,
-				rocket,
-				destination
-			})
-		}
-		callhttpSubmitLaunch();
-	}
 	
 	return (
 		<div className="w-2/3 p-6 border-2 mt-6 mx-auto">
@@ -100,4 +65,5 @@ const Launch = () => {
 	)
 }
 
-export default Launch;
+// export { Launch, launchAdded }
+export { Launch };

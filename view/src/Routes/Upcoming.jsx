@@ -1,26 +1,5 @@
-import { useState, useEffect, useCallback } from 'react';
-import { httpGetLaunches } from '../hooks/request';
-
-const Upcoming = () => {
-	const [launches, setLaunches] = useState([]);
-
-	const getLaunches = useCallback(async () => {
-		let response = await httpGetLaunches();
-		setLaunches(response);
-	}, []);
-
-	useEffect(() => {
-		// const getLaunches = async () => {
-		// 	let response = await httpGetLaunches();
-		// 	setLaunches(response);
-		// 	setNoOfLaunches(launches.length);
-		// }
-		getLaunches();
-	}, [getLaunches]);
-	// console.log(launches);
-	
-	const filteredLaunch = launches.filter(launch => launch.upcoming)
-	console.log(filteredLaunch);
+const Upcoming = (props) => {
+	const { filteredLaunch } = props;
 
 	const launchTable = filteredLaunch.map((launch) => {
 		return (

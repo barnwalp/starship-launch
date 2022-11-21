@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { httpGetPlanets, httpSubmitLaunch } from './hooks/request';
+import { httpGetPlanets, httpSubmitLaunch, httpGetLaunches } from './hooks/request';
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navigation from "./Routes/Navigation";
@@ -9,6 +9,7 @@ import { Launch } from "./Routes/Launch";
 
 const App = () => {
 	const [planets, setPlanets] = useState([]);
+	const [launches, setLaunches] = useState([]);
 	
 	useEffect(() => {
 		const fetchData = async () => {
@@ -24,6 +25,18 @@ const App = () => {
 		}
 		fetchData();
 	}, [])
+
+	useEffect(() => {
+		const getLaunches = async () => {
+			let response = await httpGetLaunches();
+			setLaunches(response);
+			// setNoOfLaunches(launches.length);
+		}
+		getLaunches();
+	}, []);
+	// console.log(launches);
+	const filteredLaunch = launches.filter(launch => launch.upcoming)
+	// console.log(filteredLaunch);
 	
 	const handleSubmit = (event) => {
 		event.preventDefault();
@@ -56,7 +69,13 @@ const App = () => {
 								/>
 							} 
 						/>
-						<Route path="upcoming" element={<Upcoming />} />
+						<Route 
+							path="upcoming" 
+							element={
+								<Upcoming 
+									filteredLaunch={filteredLaunch}
+							/>} 
+						/>
 						<Route path="history" element={<History />} />
 					</Route>
 				</Routes>

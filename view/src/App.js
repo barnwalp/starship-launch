@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { httpGetPlanets, httpSubmitLaunch, httpGetLaunches } from './hooks/request';
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
@@ -14,46 +14,44 @@ const App = () => {
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await httpGetPlanets();
-			// console.log(response);
 			const planetList = [];
 			response.map((planet) => {
-				// console.log(planet.kepler_name);
-				planetList.push(planet.kepler_name);
+				return planetList.push(planet.kepler_name);
 			})
-			// console.log(planetList);
 			setPlanets(planetList);
 		}
 		fetchData();
 	}, [])
 
+	console.log('######## launches are: ########');
+	console.log(launches);
+	const filteredLaunch = launches.filter(launch => launch.upcoming);
+	console.log('######## filtered launches are: ########');
+	console.log(filteredLaunch);
+
+	const getLaunches = useCallback(async () => {
+		let response = await httpGetLaunches();
+		setLaunches(response);
+	},[])
+
 	useEffect(() => {
-		const getLaunches = async () => {
-			let response = await httpGetLaunches();
-			setLaunches(response);
-			// setNoOfLaunches(launches.length);
-		}
 		getLaunches();
-	}, []);
-	// console.log(launches);
-	const filteredLaunch = launches.filter(launch => launch.upcoming)
-	// console.log(filteredLaunch);
+	}, [getLaunches]);
 	
-	const handleSubmit = (event) => {
+	const handleSubmit = useCallback(async (event) => {
 		event.preventDefault();
-		const callhttpSubmitLaunch = async () => {
-			const launchDate = event.target[0].value;
-			const mission = event.target[1].value;
-			const rocket = event.target[2].value;
-			const destination = event.target[3].value;
-			await httpSubmitLaunch({
-				launchDate,
-				mission,
-				rocket,
-				destination
-			})
-		}
-		callhttpSubmitLaunch();
-	}
+		const launchDate = event.target[0].value;
+		const mission = event.target[1].value;
+		const rocket = event.target[2].value;
+		const destination = event.target[3].value;
+		await httpSubmitLaunch({
+			launchDate,
+			mission,
+			rocket,
+			destination
+		})
+		getLaunches();
+	},[getLaunches]) 
 
 	return(
 		<div className="bg-main xl:h-screen font-extralight font-dosis text-primary">

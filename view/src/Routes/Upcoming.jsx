@@ -1,5 +1,7 @@
 const Upcoming = (props) => {
 	const { filteredLaunch } = props;
+	// console.log('upcoming launches passed from props are:');
+	// console.log(filteredLaunch);
 
 	const launchTable = filteredLaunch.map((launch) => {
 		return (

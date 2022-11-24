@@ -1,11 +1,21 @@
+import { ImCross } from "react-icons/im";
+
 const Upcoming = (props) => {
-	const { filteredLaunch } = props;
-	// console.log('upcoming launches passed from props are:');
-	// console.log(filteredLaunch);
+	const { launches, handleAbort } = props;
+	const filteredLaunch = launches.filter(launch => launch.upcoming);
+	console.log('######## filtered launches are: ########');
+	console.log(filteredLaunch);
 
 	const launchTable = filteredLaunch.map((launch) => {
 		return (
 			<tr className="">
+				<td className="font-light text-red pr-2 text-center">
+					<button
+						onClick={handleAbort}
+					>
+						<ImCross />
+					</button> 
+				</td>
 				<td className="font-light py-1 text-center">{launch.flightNumber}</td>
 				<td className="font-light text-center">{launch.launchDate}</td>
 				<td className="font-light text-center">{launch.mission}</td>
@@ -22,6 +32,7 @@ const Upcoming = (props) => {
 				<p className="text-2xl mt-3">Warning! Clicking on the X aborts the mission.</p>
 				<table className="mt-3 w-full">
 					<tr className="border-b-2 text-lg">
+						<th></th>
 						<th className="">No</th>
 						<th className="">Date</th>
 						<th className="">Mission</th>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { httpGetPlanets, httpSubmitLaunch, httpGetLaunches } from './hooks/request';
+import { httpGetPlanets, httpSubmitLaunch, httpGetLaunches, httpAbortLaunch } from './hooks/request';
 
 import { Routes, Route, BrowserRouter } from "react-router-dom";
 import Navigation from "./Routes/Navigation";
@@ -25,9 +25,6 @@ const App = () => {
 
 	console.log('######## launches are: ########');
 	console.log(launches);
-	const filteredLaunch = launches.filter(launch => launch.upcoming);
-	console.log('######## filtered launches are: ########');
-	console.log(filteredLaunch);
 
 	const getLaunches = useCallback(async () => {
 		let response = await httpGetLaunches();
@@ -53,6 +50,10 @@ const App = () => {
 		getLaunches();
 	},[getLaunches]) 
 
+	const handleAbort = (event) => {
+		console.log(event.target);
+	}
+
 	return(
 		<div className="bg-main xl:h-screen font-extralight font-dosis text-primary">
 			<BrowserRouter>
@@ -71,7 +72,8 @@ const App = () => {
 							path="upcoming" 
 							element={
 								<Upcoming 
-									filteredLaunch={filteredLaunch}
+									launches={launches}
+									handleAbort={handleAbort}
 							/>} 
 						/>
 						<Route path="history" element={<History />} />

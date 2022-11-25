@@ -77,7 +77,14 @@ const App = () => {
 									handleAbort={handleAbort}
 							/>} 
 						/>
-						<Route path="history" element={<History />} />
+						<Route 
+							path="history" 
+							element={
+								<History
+									launches={launches}
+								/>
+							} 
+						/>
 					</Route>
 				</Routes>
 			</BrowserRouter>

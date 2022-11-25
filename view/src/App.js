@@ -50,8 +50,8 @@ const App = () => {
 		getLaunches();
 	},[getLaunches]) 
 
-	const handleAbort = (event) => {
-		console.log(event.target);
+	const handleAbort = (id) => {
+		console.log(id);
 	}
 
 	return(

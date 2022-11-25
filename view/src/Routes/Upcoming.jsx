@@ -8,15 +8,17 @@ const Upcoming = (props) => {
 
 	const launchTable = filteredLaunch.map((launch) => {
 		return (
-			<tr className="">
-				<td className="font-light text-red pr-2 text-center">
+			<tr>
+				<td className="font-light py-1 text-center" 
+					onClick={() => handleAbort(launch.flightNumber)}
+				>
 					<button
-						onClick={handleAbort}
+						className="font-light text-red pr-3 text-center"
 					>
 						<ImCross />
 					</button> 
+					{launch.flightNumber}
 				</td>
-				<td className="font-light py-1 text-center">{launch.flightNumber}</td>
 				<td className="font-light text-center">{launch.launchDate}</td>
 				<td className="font-light text-center">{launch.mission}</td>
 				<td className="font-light text-center">{launch.rocket}</td>
@@ -32,7 +34,6 @@ const Upcoming = (props) => {
 				<p className="text-2xl mt-3">Warning! Clicking on the X aborts the mission.</p>
 				<table className="mt-3 w-full">
 					<tr className="border-b-2 text-lg">
-						<th></th>
 						<th className="">No</th>
 						<th className="">Date</th>
 						<th className="">Mission</th>

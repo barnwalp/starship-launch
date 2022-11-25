@@ -50,9 +50,10 @@ const App = () => {
 		getLaunches();
 	},[getLaunches]) 
 
-	const handleAbort = (id) => {
-		console.log(id);
-	}
+	const handleAbort = (async (id) => {
+		await httpAbortLaunch(id);
+		getLaunches();
+	})
 
 	return(
 		<div className="bg-main xl:h-screen font-extralight font-dosis text-primary">

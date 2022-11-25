@@ -27,7 +27,7 @@ async function httpSubmitLaunch(launch) {
 }
 
 async function httpAbortLaunch(id) {
-	const response = await fetch('http://localhost:7000/launches' + id, {
+	const response = await fetch('http://localhost:7000/launches/' + id, {
 		method: "DELETE",
 	})
 	console.log(response.json());

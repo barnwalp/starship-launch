@@ -3,18 +3,18 @@ const { getLaunches } = require('../../models/launches.model');
 let launches = getLaunches();
 
 function getAllLaunches(req, res) {
-	res.status(200).json(launches);
+	return res.status(200).json(launches);
 }
 
 function postLaunch(req, res) {
 	const formDate = req.body.launchDate;
 	const dateInString = new Date(formDate).toDateString();
 	if(!req.body.mission || !req.body.rocket || !req.body.launchDate || !req.body.destination) {
-		res.status(400).json({
+		return res.status(400).json({
 			error: 'Invalid Request'
 		});
 	} else if (isNaN(new Date(req.body.launchDate))){
-		res.status(400).json({
+		return res.status(400).json({
 			error: 'Invalid Launch Date'
 		})	
 	}	else {
@@ -29,8 +29,8 @@ function postLaunch(req, res) {
 			success: true,
 		}
 		launches.push(newLaunch);
-		res.json(newLaunch);
 		console.log(`launch after addition: ${newLaunch}`);
+		return res.status(200).json(newLaunch);
 	}
 }
 
@@ -40,7 +40,7 @@ function abortLaunch(req, res) {
 		if(launch.flightNumber === id) {
 			launch.upcoming = false;
 			launch.success = false;
-			res.status(200).json(launch);
+			return res.status(200).json(launch);
 		}
 	})
 }

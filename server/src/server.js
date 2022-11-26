@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const morgan = require('morgan');
+const mongoose = require('mongoose');
+const { readPassword } = require('./readFile');
 const { planetsRouter } = require('../src/routes/planets/planets.router');
 const { launchesRouter } = require('../src/routes/launches/launches.router');
 
@@ -13,14 +15,35 @@ const app = express();
 app.use(cors({
 	origin: 'http://localhost:3006',
 }))
+
 // middleware for logging
 app.use(morgan('combined'));
 app.use(express.json());
 app.use('/planets', planetsRouter);
 app.use('/launches', launchesRouter);
 
+mongoose.connection.once('open', () => {
+	console.log('MongoDB connection ready!');
+})
+
+mongoose.connection.on('error', (err) => {
+	console.error(err);
+})
+
+const startMongoose = async () => {
+	readPassword()
+		.then(async ( data ) => {
+			console.log(data);
+			const MONGO_URL = `mongodb+srv://pankaj:${data}@starship-clustor-1.guktlu3.mongodb.net/?retryWrites=true&w=majority`;
+			await mongoose.connect(MONGO_URL);
+		})
+		.catch(err => console.log(err));
+}
+
 app.listen(PORT, () => {
 	console.log(`Listening on PORT ${PORT}`);
 })
+
+startMongoose();
 
 module.exports = app;

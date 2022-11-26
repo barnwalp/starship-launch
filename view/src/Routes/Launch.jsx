@@ -1,5 +1,5 @@
 const Launch = (props) => {
-	const { planets, handleSubmit } = props;
+	const { planets, handleSubmit, launchAdded} = props;
 
 	const today = new Date().toISOString().split("T")[0];
 	
@@ -60,6 +60,7 @@ const Launch = (props) => {
 					type="submit">
 					Launch Mission
 				</button>
+				{launchAdded ? <p className="mt-2 ml-8">Success</p> : <p></p>}
 			</form>
 		</div>
 	)

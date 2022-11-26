@@ -10,6 +10,7 @@ import { Launch } from "./Routes/Launch";
 const App = () => {
 	const [planets, setPlanets] = useState([]);
 	const [launches, setLaunches] = useState([]);
+	const [launchAdded, setLaunchAdded] = useState(false);
 	
 	useEffect(() => {
 		const fetchData = async () => {
@@ -47,6 +48,10 @@ const App = () => {
 			rocket,
 			destination
 		})
+		setLaunchAdded(true);
+		setTimeout(() => {
+			setLaunchAdded(false);
+		}, 800)
 		getLaunches();
 	},[getLaunches]) 
 
@@ -66,6 +71,7 @@ const App = () => {
 								<Launch
 									planets={planets}
 									handleSubmit={handleSubmit}
+									launchAdded={launchAdded}	
 								/>
 							} 
 						/>

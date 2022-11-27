@@ -45,12 +45,12 @@ const Launch = (props) => {
 				/>
 				<label htmlFor="planets-selector">Destination Exoplanet</label>
 				<select className="text-black text-lg px-2 font-medium" id="planets-selector" name="planets-selector">
-					{planets.map((planet_name) => {
+					{planets.map((planetName) => {
 						return (
 							<option 
-								value={planet_name} 
-								key={planet_name}>
-								{planet_name}
+								value={planetName} 
+								key={planetName}>
+								{planetName}
 							</option>
 						)
 					})}

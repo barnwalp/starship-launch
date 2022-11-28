@@ -1,6 +1,7 @@
 const launchDb = require('./launches.mongo');
 
-const launch = {
+const launch = [
+	{
 		flightNumber: 100,
 		mission: 'Kepler Exploration X',
 		rocket: 'Explorer IS1',
@@ -9,25 +10,27 @@ const launch = {
 		customers: ['ISRO', 'NASA'],
 		upcoming: true,
 		success: true
-	}
-	// {
-	// 	flightNumber: 101,
-	// 	mission: 'Kepler Exploration X',
-	// 	rocket: 'Explorer IS2',
-	// 	launchDate: new Date('January 28, 2029').toDateString(),
-	// 	destination: 'kepler-62 f',
-	// 	customer: ['ISRO', 'NASA'],
-	// 	upcoming: true,
-	// 	success: true
-	// },
+	},
+	{
+		flightNumber: 101,
+		mission: 'Kepler Exploration X',
+		rocket: 'Explorer IS2',
+		launchDate: new Date('January 28, 2029').toDateString(),
+		destination: 'kepler-62 f',
+		customer: ['ISRO', 'NASA'],
+		upcoming: true,
+		success: true
+	},
+]
 
-async function saveData(launch) {
+function saveData(launch) {
 	try {
-		console.log(launch.flightNumber)
-		await launchDb.updateOne({
-			flightNumber: launch.flightNumber,
-		}, launch, {
-			upsert: true,
+		launch.map(async (flightData) => {
+			await launchDb.updateOne({
+				flightNumber: flightData.flightNumber,
+			}, flightData, {
+				upsert: true,
+			})
 		})
 	} catch (e) {
 		console.log(e);

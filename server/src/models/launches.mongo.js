@@ -16,15 +16,17 @@ const launchesSchema = new mongoose.Schema({
 	launchDate: {
 		type: Date,
 		required: true,
+		default: new Date().toLocaleDateString(),
 	},
 	destination: {
 		type: String,
 		required: true,
+		default: new Date().toLocaleDateString(),
 	},
 	customers: [ String ],
 	upcoming: {
 		type: Boolean,
-		required: true,
+		default: true,
 	},
 	success: {
 		type: Boolean,

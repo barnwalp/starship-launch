@@ -17,7 +17,7 @@ const App = () => {
 			const response = await httpGetPlanets();
 			const planetList = [];
 			response.map((planet) => {
-				return planetList.push(planet.kepler_name);
+				return planetList.push(planet.keplerName);
 			})
 			setPlanets(planetList);
 		}

@@ -3,6 +3,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const mongoose = require('mongoose');
 const { readPassword } = require('./readFile');
+const { loadPlanetData } = require('./models/planets.model');
 const { planetsRouter } = require('../src/routes/planets/planets.router');
 const { launchesRouter } = require('../src/routes/launches/launches.router');
 
@@ -33,17 +34,16 @@ mongoose.connection.on('error', (err) => {
 const startMongoose = async () => {
 	readPassword()
 		.then(async ( data ) => {
-			console.log(data);
 			const MONGO_URL = `mongodb+srv://pankaj:${data}@starship-clustor-1.guktlu3.mongodb.net/?retryWrites=true&w=majority`;
 			await mongoose.connect(MONGO_URL);
 		})
 		.catch(err => console.log(err));
+	await loadPlanetData();
 }
 
 app.listen(PORT, () => {
 	console.log(`Listening on PORT ${PORT}`);
 })
-
 startMongoose();
 
 module.exports = app;

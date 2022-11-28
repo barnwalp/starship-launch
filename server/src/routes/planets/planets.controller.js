@@ -1,8 +1,8 @@
 const { getPlanets } = require('../../models/planets.model');
 
-let planets = getPlanets();
-
-function getAllPlanets(req, res) {
+async function getAllPlanets(req, res) {
+	const planets = await getPlanets();
+	// console.log(`habitable planets are: ${planets}`)
 	res.status(200).json(planets);
 }
 

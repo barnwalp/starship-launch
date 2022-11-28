@@ -1,8 +1,7 @@
 const path = require('path');
 const { parse } = require('csv-parse');
 const fs = require('fs');
-
-const habitablePlanets = [];
+const Planets = require('./planets.mongo');
 
 function isHabitablePlanet(planet) {
   return planet['koi_disposition'] === 'CONFIRMED'
@@ -11,40 +10,45 @@ function isHabitablePlanet(planet) {
 }
 
 // fs.createReadStream run codes asynchronously so it should be wrapped inside of promise
-function getPlanetStream() {
+function loadPlanetData() {
 	return new Promise((resolve, reject) => {
 		fs.createReadStream(path.join(__dirname, '..', '..', 'data', 'kepler_data.csv'))
 			.pipe(parse({
 				comment: '#',
 				columns: true,
 			}))
-			.on('data', (data) => {
+			.on('data', async (data) => {
+				// console.log(data.kepler_name);
 				if (isHabitablePlanet(data)) {
-					habitablePlanets.push(data);
+					await Planets.updateOne({
+						keplerName: data.kepler_name,
+					}, {
+						keplerName: data.kepler_name,
+					}, {
+						upsert: true,
+					})
+					// habitablePlanets.push(data);
 				}
 			})
 			.on('error', (err) => {
 				reject(err);
 			})
-			.on('end', () => {
-				// console.log(habitablePlanets.map((planet) => {
-				// 	return planet['kepler_name'];
-				// }));
-				// console.log(`${habitablePlanets.length} habitable planets found!`);
-				// resolve('ok');
+			.on('end', async () => {
+				// const planets = await getPlanets();
+				// console.log(`${planets.length} habitable planets found!`);
+				resolve();
 			});
 	})
 }
 
 // Creating a function to get the habitable planets, same will be used in the controller
-function getPlanets() {
-	getPlanetStream()
-		.then(data => console.log(data))
-		.catch(err => console.log(err));
+async function getPlanets() {
+	const habitablePlanets = await Planets.find({}, {'keplerName': 1})
 	// console.log(`habitable planets are: ${habitablePlanets}`)
 	return habitablePlanets;
 }
 
 module.exports = {
+	loadPlanetData,
 	getPlanets,
 }

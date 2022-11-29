@@ -38,7 +38,7 @@ function saveData(launch) {
 }
 
 async function getLaunchesDb() {
-
+	return launchDb.find({})
 }
 saveData(launch);
 
@@ -52,5 +52,6 @@ function noOfLaunches() {
 
 module.exports = {
 	getLaunches,
+	getLaunchesDb,
 	noOfLaunches,
 }

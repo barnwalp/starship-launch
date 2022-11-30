@@ -1,8 +1,5 @@
-const { getLaunches, getLaunchesDb } = require('../../models/launches.model');
-
-// let launches = getLaunches();
-// console.log(launches);
-// console.log('%%%%');
+// const { getLaunches } = require('../../models/launches.model');
+const { getLaunchesDb } = require('../../models/launches.model');
 
 async function getAllLaunches(req, res) {
 	// const launches = getLaunches();

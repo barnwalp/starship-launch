@@ -43,12 +43,24 @@ server/
 view/
 	src/
 		hooks/
+
 			request.js
+				httpGetPlanets(): fetch planet data from server using REST API
+				httpGetLaunches(): fetch launches data from server using REST API
+				httpSubmitLaunch(): post new launch data to server using REST API
+				httpAbortLaunch(): delete launch using REST API
+
 		Routes/
 			History.jsx
 			Launch.jsx
 			Navigation.jsx
 			Upcoming.jsx
+
 		App.js
+			fetchData(): fetch data with httpGetPlanets() using useEffect and set planets state
+			getLaunches(): fetch all launches with httpGetLaunches() and set launch state
+			handleSubmit(): submit with new launch data using httpSubmitLaunch()
+			handleAbort(): abort launch using httpAbortLaunch()
+
 		index.js
 

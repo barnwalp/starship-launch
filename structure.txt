@@ -1,0 +1,54 @@
+Structure
+
+server/
+	data/
+	src/
+		models/
+			launches.mongo.js: Creates a schema and exports the model/collection based on the created schema 
+
+			launches.model.js: Creating functions using launches.mongo.js to get launch data from launches collections
+				saveLaunches(): upsert launch data in launchDb collection
+				getLaunchesDb(): return all launches from launchDb
+				noOfLaunches()
+
+			planets.mongo.js: Creates planetSchema and export the Planet collections
+
+			planets.model.js: Creating function using planets.mongo.js to get planet data from Planets collection
+				isHabitablePlanet(): check if given planet is habitable or not
+				loadPlanetData(): update Planets collection with habitable planet data taken from csv file
+				getPlanets(): return habitable planets from Planets collections
+
+		routes/
+			launches/
+				launches.router.js: Creating all REST API request such as get, post, delete etc
+
+				launches.controller.js: Creating controller functions of REST API for launches
+					getAlllaunches(): Returning launches data in JSON with 200 status code
+					postLaunch(): Add new launch data as JSON format to the database
+					abortLaunch(): Change upcoming flag to false to abort the launch
+
+				launches.test.js: Test APIs
+
+			planets/
+				planets.router.js
+
+				planets.controller.js: Creating controller function of REST API for plantes
+					getAllPlanets(): return all habitable planets as JSON format with 200 status code
+
+			readFile.js: read password of mongoose server
+
+			server.js: creating server and using planetRouter and launchRouter
+				startMongoose(): connecting to the mongoose server and loadPlanetData
+
+view/
+	src/
+		hooks/
+			request.js
+		Routes/
+			History.jsx
+			Launch.jsx
+			Navigation.jsx
+			Upcoming.jsx
+		App.js
+		index.js
+

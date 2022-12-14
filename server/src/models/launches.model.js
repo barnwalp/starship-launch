@@ -61,8 +61,8 @@ function getLaunches() {
 	return launch;
 }
 
-function noOfLaunches() {
-	return launch.length;
+async function noOfLaunches() {
+	return launchDb.countDocuments();
 }
 
 module.exports = {

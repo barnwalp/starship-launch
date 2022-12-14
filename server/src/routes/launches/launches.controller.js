@@ -1,5 +1,5 @@
 // const { getLaunches } = require('../../models/launches.model');
-const { getLaunchesDb } = require('../../models/launches.model');
+const { getLaunchesDb, noOfLaunches } = require('../../models/launches.model');
 
 async function getAllLaunches(req, res) {
 	// const launches = getLaunches();
@@ -19,19 +19,23 @@ function postLaunch(req, res) {
 			error: 'Invalid Launch Date'
 		})	
 	}	else {
-		const newLaunch = {
-			flightNumber: launches.length+100,
-			mission: req.body.mission,
-			rocket: req.body.rocket,
-			launchDate: dateInString,
-			destination: req.body.destination,
-			customer: ['ISRO', 'NASA'],
-			upcoming: true,
-			success: true,
-		}
-		launches.push(newLaunch);
-		console.log(`launch after addition: ${newLaunch}`);
-		return res.status(200).json(newLaunch);
+		noOfLaunches()
+			.then(data => {
+				console.log(data);
+				const newLaunch = {
+					flightNumber: data+100,
+					mission: req.body.mission,
+					rocket: req.body.rocket,
+					launchDate: dateInString,
+					destination: req.body.destination,
+					customer: ['ISRO', 'NASA'],
+					upcoming: true,
+					success: true,
+				}
+				// launches.push(newLaunch);
+				console.log(`launch after addition: ${newLaunch}`);
+				return res.status(200).json(newLaunch);
+			})
 	}
 }
 

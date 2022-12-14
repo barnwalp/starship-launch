@@ -1,5 +1,4 @@
-// const { getLaunches } = require('../../models/launches.model');
-const { getLaunchesDb, noOfLaunches } = require('../../models/launches.model');
+const { getLaunchesDb, noOfLaunches, insertData } = require('../../models/launches.model');
 
 async function getAllLaunches(req, res) {
 	// const launches = getLaunches();
@@ -17,7 +16,7 @@ function postLaunch(req, res) {
 	} else if (isNaN(new Date(req.body.launchDate))){
 		return res.status(400).json({
 			error: 'Invalid Launch Date'
-		})	
+		})
 	}	else {
 		noOfLaunches()
 			.then(data => {
@@ -33,6 +32,7 @@ function postLaunch(req, res) {
 					success: true,
 				}
 				// launches.push(newLaunch);
+				insertData(newLaunch);
 				console.log(`launch after addition: ${newLaunch}`);
 				return res.status(200).json(newLaunch);
 			})

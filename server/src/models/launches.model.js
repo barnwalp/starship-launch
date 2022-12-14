@@ -52,10 +52,30 @@ async function saveData(launch) {
 	}
 }
 
+saveData(launch);
+
 async function getLaunchesDb() {
 	return launchDb.find({})
 }
-saveData(launch);
+
+async function insertData(launch) {
+	try {
+		const planet = await Planet.findOne({
+			keplerName: launch.destination
+		});
+		console.log(planet);
+		if (!planet) {
+			throw new Error('No matching planet found');
+		}
+		await launchDb.updateOne({
+			flightNumber: launch.flightNumber,
+		}, launch, {
+			upsert: true,
+		})
+	} catch (e) {
+		console.log(e);
+	}
+}
 
 function getLaunches() {
 	return launch;
@@ -69,4 +89,5 @@ module.exports = {
 	getLaunches,
 	getLaunchesDb,
 	noOfLaunches,
+	insertData,
 }

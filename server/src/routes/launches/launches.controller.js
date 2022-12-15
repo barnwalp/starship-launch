@@ -8,6 +8,7 @@ async function getAllLaunches(req, res) {
 
 function postLaunch(req, res) {
 	const formDate = req.body.launchDate;
+	
 	const dateInString = new Date(formDate).toDateString();
 	if(!req.body.mission || !req.body.rocket || !req.body.launchDate || !req.body.destination) {
 		return res.status(400).json({
@@ -20,20 +21,20 @@ function postLaunch(req, res) {
 	}	else {
 		noOfLaunches()
 			.then(data => {
-				console.log(data);
+				// console.log(`no of launches are: ${data}`);
 				const newLaunch = {
-					flightNumber: data+100,
+					flightNumber: req.body.flightNumber ? req.body.flightNumber : data+100,
 					mission: req.body.mission,
 					rocket: req.body.rocket,
 					launchDate: dateInString,
 					destination: req.body.destination,
 					customer: ['ISRO', 'NASA'],
-					upcoming: true,
+					upcoming: req.body.upcoming ? req.body.upcoming : true,
+					// upcoming: true,
 					success: true,
 				}
-				// launches.push(newLaunch);
+				console.log(newLaunch.upcoming)
 				insertData(newLaunch);
-				console.log(`launch after addition: ${newLaunch}`);
 				return res.status(200).json(newLaunch);
 			})
 	}
@@ -41,13 +42,15 @@ function postLaunch(req, res) {
 
 function abortLaunch(req, res) {
 	const id = Number(req.params.id);
-	launches.map((launch) => {
-		if(launch.flightNumber === id) {
-			launch.upcoming = false;
-			launch.success = false;
-			return res.status(200).json(launch);
-		}
-	})
+	console.log(id);
+	deleteData(id);	
+	// launches.map((launch) => {
+	// 	if(launch.flightNumber === id) {
+	// 		launch.upcoming = false;
+	// 		launch.success = false;
+	// 		return res.status(200).json(launch);
+	// 	}
+	// })
 }
 
 module.exports = {

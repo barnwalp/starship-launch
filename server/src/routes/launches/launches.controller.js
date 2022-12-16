@@ -1,6 +1,6 @@
 const { getLaunchesDb, noOfLaunches, insertData, deleteData } = require('../../models/launches.model');
 
-async function getAllLaunches(req, res) {
+async function getAllLaunches(_req, res) {
 	// const launches = getLaunches();
 	const launches = await getLaunchesDb();
 	return res.status(200).json(launches);
@@ -21,16 +21,14 @@ function postLaunch(req, res) {
 	}	else {
 		noOfLaunches()
 			.then(data => {
-				// console.log(`no of launches are: ${data}`);
 				const newLaunch = {
-					flightNumber: req.body.flightNumber ? req.body.flightNumber : data+100,
+					flightNumber: data+100,
 					mission: req.body.mission,
 					rocket: req.body.rocket,
 					launchDate: dateInString,
 					destination: req.body.destination,
 					customer: ['ISRO', 'NASA'],
-					upcoming: req.body.upcoming ? req.body.upcoming : true,
-					// upcoming: true,
+					upcoming: true,
 					success: true,
 				}
 				console.log(newLaunch.upcoming)
@@ -40,18 +38,11 @@ function postLaunch(req, res) {
 	}
 }
 
-async function abortLaunch(req, res) {
+async function abortLaunch(req, _res) {
 	const id = Number(req.params.id);
 	console.log(id);
 	const content = await deleteData(id);	
 	console.log(content);
-	// launches.map((launch) => {
-	// 	if(launch.flightNumber === id) {
-	// 		launch.upcoming = false;
-	// 		launch.success = false;
-	// 		return res.status(200).json(launch);
-	// 	}
-	// })
 }
 
 module.exports = {

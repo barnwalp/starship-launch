@@ -9,8 +9,8 @@ getPlanets()
 const launch = [
 	{
 		flightNumber: 100,
-		mission: 'Kepler Exploration X',
-		rocket: 'Explorer IS1',
+		mission: 'Kepler Exploration XX',
+		rocket: 'Explorer IS3',
 		launchDate: new Date('December 21, 2028').toDateString(),
 		destination: 'Kepler-442 b',
 		// destination: 'Earth',
@@ -59,11 +59,12 @@ async function getLaunchesDb() {
 }
 
 async function insertData(launch) {
+	console.log(launch.flightNumber);
 	try {
 		const planet = await Planet.findOne({
 			keplerName: launch.destination
 		});
-		console.log(planet);
+		console.log(`logging planet from insertData ${planet}`);
 		if (!planet) {
 			throw new Error('No matching planet found');
 		}
@@ -74,6 +75,27 @@ async function insertData(launch) {
 		})
 	} catch (e) {
 		console.log(e);
+	}
+}
+
+async function deleteData(id) {
+	try {
+		const launch = await launchDb.findOne({flightNumber: id})
+		const modLaunch = {
+			...launch._doc,
+			upcoming: !launch.upcoming,
+		};
+		// console.log(launch);
+		// console.log(modLaunch);
+		await launchDb.updateOne({
+			flightNumber: id,
+		}, modLaunch,{
+			upsert: true,
+		})
+		return await launchDb.findOne({flightNumber: id});
+	} catch (e) {
+		console.log(e);
+		return e;
 	}
 }
 
@@ -90,4 +112,5 @@ module.exports = {
 	getLaunchesDb,
 	noOfLaunches,
 	insertData,
+	deleteData,
 }

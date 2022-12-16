@@ -1,4 +1,4 @@
-const { getLaunchesDb, noOfLaunches, insertData } = require('../../models/launches.model');
+const { getLaunchesDb, noOfLaunches, insertData, deleteData } = require('../../models/launches.model');
 
 async function getAllLaunches(req, res) {
 	// const launches = getLaunches();
@@ -40,10 +40,11 @@ function postLaunch(req, res) {
 	}
 }
 
-function abortLaunch(req, res) {
+async function abortLaunch(req, res) {
 	const id = Number(req.params.id);
 	console.log(id);
-	deleteData(id);	
+	const content = await deleteData(id);	
+	console.log(content);
 	// launches.map((launch) => {
 	// 	if(launch.flightNumber === id) {
 	// 		launch.upcoming = false;

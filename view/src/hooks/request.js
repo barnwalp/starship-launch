@@ -24,14 +24,22 @@ async function httpSubmitLaunch(launch) {
 		body: JSON.stringify(launch),
 	});
 	const content = await response.json();
+	console.log('return from httpSubmitLaunch');
 	console.log(content);
 }
 
-async function httpAbortLaunch(id) {
-	const response = await fetch('http://localhost:7000/launches/' + id, {
+async function httpAbortLaunch(launch) {
+	const response = await fetch('http://localhost:7000/launches/' + launch.flightNumber, {
 		method: "DELETE",
 	})
-	console.log(response.json());
+	const content = await response.json();
+	console.log(content);
+	// let modLaunch = {
+	// 	...launch,
+	// 	upcoming: !launch.upcoming,
+	// }
+	// // console.log(modLaunch);
+	// await httpSubmitLaunch(modLaunch);
 }
 
 export {

@@ -10,7 +10,8 @@ const Upcoming = (props) => {
 		return (
 			<tr>
 				<td className="font-light py-1 text-center" 
-					onClick={() => handleAbort(Number(launch.flightNumber))}
+					// onClick={() => handleAbort(Number(launch.flightNumber))}
+					onClick={() => handleAbort(launch)}
 				>
 					<button
 						className="font-light text-red pr-3 text-center"

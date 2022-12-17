@@ -9,8 +9,8 @@ getPlanets()
 const launch = [
 	{
 		flightNumber: 100,
-		mission: 'Kepler Exploration XX',
-		rocket: 'Explorer IS3',
+		mission: 'Kepler Exploration X',
+		rocket: 'Explorer IS1',
 		launchDate: new Date('December 21, 2028').toDateString(),
 		destination: 'Kepler-442 b',
 		// destination: 'Earth',
@@ -30,6 +30,19 @@ const launch = [
 	// 	success: true
 	// },
 ]
+
+// trigger added in Mongodb atlas
+// exports = async function(changeEvent) {
+//     var docId = changeEvent.fullDocument._id;
+    
+//     const countercollection = context.services.get("starship-clustor-1").db(changeEvent.ns.db).collection("counters");
+//     const launchcollection = context.services.get("starship-clustor-1").db(changeEvent.ns.db).collection(changeEvent.ns.coll);
+    
+//     var counter = await countercollection.findOneAndUpdate({_id: changeEvent.ns },{ $inc: { seq_value: 1 }}, { returnNewDocument: true, upsert : true});
+//     var updateRes = await launchcollection.updateOne({_id : docId},{ $set : {launchId : counter.seq_value}});
+    
+//     console.log(`Updated ${JSON.stringify(changeEvent.ns)} with counter ${counter.seq_value} result : ${JSON.stringify(updateRes)}`);
+//     };
 
 async function saveData(launch) {
 	try {
@@ -68,7 +81,7 @@ async function insertData(launch) {
 		if (!planet) {
 			throw new Error('No matching planet found');
 		}
-		await launchDb.updateOne({
+		await launchDb.findOneAndUpdate({
 			flightNumber: launch.flightNumber,
 		}, launch, {
 			upsert: true,
@@ -87,7 +100,7 @@ async function deleteData(id) {
 		};
 		// console.log(launch);
 		// console.log(modLaunch);
-		await launchDb.updateOne({
+		await launchDb.findOneAndUpdate({
 			flightNumber: id,
 		}, modLaunch,{
 			upsert: true,
@@ -106,6 +119,10 @@ function getLaunches() {
 async function noOfLaunches() {
 	return launchDb.countDocuments();
 }
+
+// async function getLatestFlight() {
+	
+// }
 
 module.exports = {
 	getLaunches,

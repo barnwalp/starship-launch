@@ -11,7 +11,8 @@ const App = () => {
 	const [planets, setPlanets] = useState([]);
 	const [launches, setLaunches] = useState([]);
 	const [launchAdded, setLaunchAdded] = useState(false);
-	
+
+	// side-effect for getting planets data to populate drop down
 	useEffect(() => {
 		const fetchData = async () => {
 			const response = await httpGetPlanets();
@@ -23,10 +24,8 @@ const App = () => {
 		}
 		fetchData();
 	}, [])
-
-	console.log('######## launches are: ########');
-	console.log(launches);
-
+	
+	// 
 	const getLaunches = useCallback(async () => {
 		let response = await httpGetLaunches();
 		setLaunches(response);
@@ -36,7 +35,10 @@ const App = () => {
 		getLaunches();
 	}, [getLaunches]);
 	
-	const handleSubmit = useCallback(async (event) => {
+	// console.log('######## launches are: ########');
+	// console.log(launches);
+
+	const handleSubmit = async (event) => {
 		event.preventDefault();
 		const launchDate = event.target[0].value;
 		const mission = event.target[1].value;
@@ -52,8 +54,13 @@ const App = () => {
 		setTimeout(() => {
 			setLaunchAdded(false);
 		}, 800)
-		getLaunches();
-	},[getLaunches]) 
+		let response = await httpGetLaunches();
+		console.log('response after new launch addition');
+		console.log(response);
+		setLaunches(response);
+		// console.log('launches from handleSubmit')
+		// console.log(launches);
+	}
 
 	const handleAbort = (async (id) => {
 		await httpAbortLaunch(id);

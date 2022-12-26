@@ -96,7 +96,7 @@ async function deleteData(id) {
 		const launch = await launchDb.findOne({flightNumber: id})
 		const modLaunch = {
 			...launch._doc,
-			upcoming: !launch.upcoming,
+			upcoming: false
 		};
 		// console.log(launch);
 		// console.log(modLaunch);

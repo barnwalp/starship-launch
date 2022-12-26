@@ -58,12 +58,11 @@ const App = () => {
 		console.log('response after new launch addition');
 		console.log(response);
 		setLaunches(response);
-		// console.log('launches from handleSubmit')
-		// console.log(launches);
 	}
 
 	const handleAbort = (async (id) => {
-		await httpAbortLaunch(id);
+		const abortedLaunch = await httpAbortLaunch(id);
+		console.log(abortedLaunch);
 		getLaunches();
 	})
 

@@ -35,13 +35,9 @@ async function httpAbortLaunch(launch) {
 		method: "DELETE",
 	})
 	const content = await response.json();
+	console.log('aborted launch is: ');
 	console.log(content);
-	// let modLaunch = {
-	// 	...launch,
-	// 	upcoming: !launch.upcoming,
-	// }
-	// // console.log(modLaunch);
-	// await httpSubmitLaunch(modLaunch);
+	return content;
 }
 
 export {

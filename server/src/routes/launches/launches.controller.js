@@ -35,11 +35,12 @@ async function postLaunch(req, res) {
 	}
 }
 
-async function abortLaunch(req, _res) {
+async function abortLaunch(req, res) {
 	const id = Number(req.params.id);
 	console.log(id);
 	const content = await deleteData(id);	
 	console.log(content);
+	return res.status(200).json(content);
 }
 
 module.exports = {

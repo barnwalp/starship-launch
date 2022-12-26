@@ -11,7 +11,9 @@ async function httpGetLaunches() {
 	// TODO: Once API is ready
 	const response = await fetch('http://localhost:7000/launches');	
 	// Load launches and return JSON
-	const launches = await response.json();	
+	const launches = await response.json();
+	console.log('response after new launch addition');
+	console.log(launches);
 	return launches;	
 }
 

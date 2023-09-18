@@ -6,6 +6,7 @@ async function readPassword() {
 	try {
 		const data = await fs.readFile(curPath, 'utf-8');
 		const password = JSON.parse(data);
+		console.log(password.mongodb);
 		return password.mongodb;
 	} catch (err) {
 		return err;

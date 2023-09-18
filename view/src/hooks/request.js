@@ -1,6 +1,6 @@
 async function httpGetPlanets() {
 	// TODO: Once API is ready
-	const response = await fetch('http://localhost:7000/planets');
+	const response = await fetch('http://localhost:7005/planets');
 	// Load planets and return JSON
 	const planets = await response.json();
 	// console.log(`planets are ${planets}`)
@@ -9,7 +9,7 @@ async function httpGetPlanets() {
 
 async function httpGetLaunches() {
 	// TODO: Once API is ready
-	const response = await fetch('http://localhost:7000/launches');	
+	const response = await fetch('http://localhost:7005/launches');	
 	// Load launches and return JSON
 	const launches = await response.json();
 	console.log('response after new launch addition');
@@ -18,7 +18,7 @@ async function httpGetLaunches() {
 }
 
 async function httpSubmitLaunch(launch) {
-	const response = await fetch('http://localhost:7000/launches', { 
+	const response = await fetch('http://localhost:7005/launches', { 
 		method: "POST",
 		headers: {
 			"Content-Type": "application/json",
@@ -31,7 +31,7 @@ async function httpSubmitLaunch(launch) {
 }
 
 async function httpAbortLaunch(launch) {
-	const response = await fetch('http://localhost:7000/launches/' + launch.flightNumber, {
+	const response = await fetch('http://localhost:7005/launches/' + launch.flightNumber, {
 		method: "DELETE",
 	})
 	const content = await response.json();
